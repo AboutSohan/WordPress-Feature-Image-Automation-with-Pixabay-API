@@ -1,7 +1,9 @@
 from httpx import get, post
 import base64
-
-
+#
+#
+#
+#
 def image_from_media(img_src):
     """This functions will return (image from folder) codes into Gutenberg format for WordPress post.
     input: You have to input (image source from folder)"""
