@@ -1,8 +1,6 @@
 from httpx import get, post
 import base64
-import os
-from dotenv import load_dotenv
-load_dotenv()
+
 
 def image_from_media(img_src):
     """This functions will return (image from folder) codes into Gutenberg format for WordPress post.
@@ -21,7 +19,7 @@ def headers(wp_user, wp_pass):
     return wp_header
 
 keyword = 'birds'
-api_key = os.getenv('PIXABAY_API_KEY')  # put your pixabay API key here
+api_key = 'PIXABAY_API_KEY'  # put your pixabay API key here
 pixabay_api = f'https://pixabay.com/api/?key={api_key}&q={keyword}&image_type=photo'
 img_url = get(pixabay_api).json().get('hits')[0].get('largeImageURL')
 
@@ -33,7 +31,7 @@ with open(f'{keyword}.jpg', 'wb') as file:
 
 
 # uploading to WordPress
-header = headers(os.getenv('wp_user'), os.getenv('wp_pass'))
+header = headers('wp_user', 'wp_pass')
 
 media_upload_json = 'https://localhost/demosite/wp-json/wp/v2/media' # change the website address
 res_id = post(media_upload_json, files=features_img, headers=header, verify=False)
